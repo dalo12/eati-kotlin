@@ -55,11 +55,11 @@ kotlin {
 }
 
 android {
-    namespace = "edu.eati25.kmp"
+    namespace = "edu.eati25.kmp.movies"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "edu.eati25.kmp"
+        applicationId = "edu.eati25.kmp.movies"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -87,11 +87,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "edu.eati25.kmp.MainKt"
+        mainClass = "edu.eati25.kmp.movies.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "edu.eati25.kmp"
+            packageName = "edu.eati25.kmp.movies"
             packageVersion = "1.0.0"
         }
     }
