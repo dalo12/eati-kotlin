@@ -21,12 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import edu.eati25.kmp.movies.movies
+import edu.eati25.kmp.movies.Movie
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen() {
-    val movie = movies[0]
+fun DetailScreen(movie: Movie, onBack: () -> Unit) {
     MaterialTheme {
         Surface {
             Scaffold(
@@ -35,7 +34,7 @@ fun DetailScreen() {
                         title = { Text(text = movie.title) },
                         navigationIcon = {
                             IconButton(
-                                onClick = { /*TODO*/ }
+                                onClick = onBack
                             ) {
                                 Icon(
                                     Icons.AutoMirrored.Filled.ArrowBack,
