@@ -7,15 +7,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import edu.eati25.kmp.movies.movies
+import edu.eati25.kmp.movies.ui.screens.home.HomeScreen
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreen {
+            HomeScreen(onMovieClick = {
                 navController.navigate("detail/${it.id}")
-            }
+            })
         }
         composable(
             route = "detail/{movieId}",
