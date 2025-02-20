@@ -27,7 +27,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import edu.eati25.kmp.movies.data.Movie
 import kmpmovies.composeapp.generated.resources.Res
@@ -38,7 +37,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun HomeScreen(
     onMovieClick: (Movie) -> Unit,
-    viewModel: HomeViewModel = viewModel { HomeViewModel() }
+    viewModel: HomeViewModel
 ) {
     MaterialTheme {
         Surface {
