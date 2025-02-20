@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import edu.eati25.kmp.movies.movies
+import edu.eati25.kmp.movies.data.movies
 import edu.eati25.kmp.movies.ui.screens.home.HomeScreen
 
 @Composable

@@ -1,4 +1,4 @@
-package edu.eati25.kmp.movies
+package edu.eati25.kmp.movies.data
 
 data class Movie(
     val id: Int,

@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import edu.eati25.kmp.movies.Movie
-import edu.eati25.kmp.movies.movies
+import edu.eati25.kmp.movies.data.Movie
+import edu.eati25.kmp.movies.data.movies
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
