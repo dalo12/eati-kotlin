@@ -9,12 +9,12 @@ class MoviesService(
 ) {
 
     suspend fun getPopularMovies(): RemoteResult {
-        return client.get("/discover/movie?sort_by=popularity.desc")
+        return client.get("/3/discover/movie?sort_by=popularity.desc")
             .body()
     }
 
     suspend fun getMovieDetails(id: Int): RemoteMovie {
-        return client.get("/movie/$id")
+        return client.get("/3/movie/$id")
             .body()
     }
 }

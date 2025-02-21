@@ -68,7 +68,7 @@ fun rememberMoviesRepository(): MoviesRepository {
             install(DefaultRequest) {
                 url {
                     protocol = URLProtocol.HTTPS
-                    host = "api.themoviedb.org/3"
+                    host = "api.themoviedb.org"
                     parameters.append("api_key", apiKey)
                 }
             }
