@@ -6,12 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import edu.eati25.kmp.movies.data.Movie
-import edu.eati25.kmp.movies.data.MoviesService
-import edu.eati25.kmp.movies.data.RemoteMovie
+import edu.eati25.kmp.movies.data.MoviesRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val moviesService: MoviesService
+    private val moviesRepository: MoviesRepository
 ) : ViewModel() {
 
     var state by mutableStateOf(UiState())
@@ -23,14 +22,9 @@ class HomeViewModel(
             state =
                 UiState(
                     isLoading = false,
-                    movies = moviesService.getPopularMovies().results.map {
-                        it.toDomainMovie()
-                    })
+                    movies = moviesRepository.getPopularMovies()
+                )
         }
-    }
-
-    private fun RemoteMovie.toDomainMovie(): Movie {
-        return Movie(id, title, "https://image.tmdb.org/t/p/w185$posterPath")
     }
 
     data class UiState(

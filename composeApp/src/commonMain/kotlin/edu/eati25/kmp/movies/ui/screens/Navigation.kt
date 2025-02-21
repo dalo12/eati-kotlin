@@ -8,12 +8,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import edu.eati25.kmp.movies.data.MoviesRepository
 import edu.eati25.kmp.movies.data.MoviesService
 import edu.eati25.kmp.movies.data.movies
 import edu.eati25.kmp.movies.ui.screens.home.HomeScreen
 import edu.eati25.kmp.movies.ui.screens.home.HomeViewModel
 import io.ktor.client.HttpClient
+import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.http.URLProtocol
 import io.ktor.serialization.kotlinx.json.json
 import kmpmovies.composeapp.generated.resources.Res
 import kmpmovies.composeapp.generated.resources.api_key
@@ -23,6 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
+    val apiKey = stringResource(Res.string.api_key)
     val httpClient = remember {
         HttpClient {
             install(ContentNegotiation) {
@@ -30,9 +34,20 @@ fun Navigation() {
                     ignoreUnknownKeys = true
                 })
             }
+            install(DefaultRequest) {
+                url {
+                    protocol = URLProtocol.HTTPS
+                    host = "api.themoviedb.org/3"
+                    parameters.append("api_key", apiKey)
+                }
+            }
         }
     }
-    val apiKey = stringResource(Res.string.api_key)
+    val moviesViewModel = viewModel {
+        val moviesService = MoviesService(httpClient)
+        val moviesRepository = MoviesRepository(moviesService)
+        HomeViewModel(moviesRepository)
+    }
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
@@ -40,7 +55,7 @@ fun Navigation() {
                 onMovieClick = {
                     navController.navigate("detail/${it.id}")
                 },
-                viewModel = viewModel { HomeViewModel(MoviesService(apiKey, httpClient)) }
+                viewModel = moviesViewModel
             )
         }
         composable(
