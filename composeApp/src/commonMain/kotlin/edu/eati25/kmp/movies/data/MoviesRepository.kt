@@ -10,6 +10,10 @@ class MoviesRepository(
         }
     }
 
+    suspend fun getMovieById(id: Int): Movie {
+        return moviesService.getMovieDetails(id).toDomainMovie()
+    }
+
     private fun RemoteMovie.toDomainMovie(): Movie {
         return Movie(id, title, "https://image.tmdb.org/t/p/w185$posterPath")
     }

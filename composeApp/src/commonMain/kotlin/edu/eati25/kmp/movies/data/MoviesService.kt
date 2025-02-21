@@ -12,4 +12,9 @@ class MoviesService(
         return client.get("/discover/movie?sort_by=popularity.desc")
             .body()
     }
+
+    suspend fun getMovieDetails(id: Int): RemoteMovie {
+        return client.get("/movie/$id")
+            .body()
+    }
 }

@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import edu.eati25.kmp.movies.data.Movie
+import edu.eati25.kmp.movies.ui.screens.common.LoadingIndicator
 import kmpmovies.composeapp.generated.resources.Res
 import kmpmovies.composeapp.generated.resources.app_name
 import org.jetbrains.compose.resources.stringResource
@@ -53,14 +54,7 @@ fun HomeScreen(
             ) { padding ->
                 val state = viewModel.state
 
-                if (state.isLoading) {
-                    Box(
-                        modifier = Modifier.fillMaxSize().padding(padding),
-                        contentAlignment = Alignment.Center
-                    ){
-                        CircularProgressIndicator()
-                    }
-                }
+                LoadingIndicator(state.isLoading)
 
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(120.dp),
