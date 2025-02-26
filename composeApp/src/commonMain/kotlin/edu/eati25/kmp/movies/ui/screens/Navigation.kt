@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import edu.eati25.kmp.movies.data.MoviesRepository
 import edu.eati25.kmp.movies.data.MoviesService
+import edu.eati25.kmp.movies.data.database.MoviesDao
 import edu.eati25.kmp.movies.ui.screens.detail.DetailScreen
 import edu.eati25.kmp.movies.ui.screens.detail.DetailViewModel
 import edu.eati25.kmp.movies.ui.screens.home.HomeScreen
@@ -25,10 +26,10 @@ import kotlinx.serialization.json.Json
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun Navigation() {
+fun Navigation(moviesDao: MoviesDao) {
     val navController = rememberNavController()
 
-    val moviesRepository = rememberMoviesRepository()
+    val moviesRepository = rememberMoviesRepository(moviesDao)
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
@@ -56,7 +57,7 @@ fun Navigation() {
 }
 
 @Composable
-fun rememberMoviesRepository(): MoviesRepository {
+fun rememberMoviesRepository(moviesDao: MoviesDao): MoviesRepository {
     val apiKey = stringResource(Res.string.api_key)
     val httpClient = remember {
         HttpClient {
@@ -76,5 +77,5 @@ fun rememberMoviesRepository(): MoviesRepository {
     }
     val moviesService = MoviesService(httpClient)
 
-    return remember { MoviesRepository(moviesService) }
+    return remember { MoviesRepository(moviesDao, moviesService) }
 }
