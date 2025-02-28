@@ -5,6 +5,7 @@ import androidx.compose.ui.window.application
 import edu.eati25.kmp.movies.data.database.getDatabaseBuilder
 
 fun main() = application {
+    initKoin()
     Window(
         onCloseRequest = ::exitApplication,
         title = "KmpMovies",
