@@ -33,12 +33,14 @@ import edu.eati25.kmp.movies.ui.screens.common.LoadingIndicator
 import kmpmovies.composeapp.generated.resources.Res
 import kmpmovies.composeapp.generated.resources.app_name
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, KoinExperimentalAPI::class)
 @Composable
 fun HomeScreen(
     onMovieClick: (Movie) -> Unit,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel = koinViewModel()
 ) {
     MaterialTheme {
         Surface {
