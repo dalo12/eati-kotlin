@@ -99,5 +99,4 @@ private fun MovieItem(movie: Movie, onClick: () -> Unit) {
             modifier = Modifier.padding(8.dp)
         )
     }
-
 }
