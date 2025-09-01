@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -44,22 +46,34 @@ fun HomeScreen(
     onMovieClick: (Movie) -> Unit,
     viewModel: HomeViewModel = koinViewModel()
 ) {
+    val state = viewModel.state
     MaterialTheme {
         Surface {
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             Scaffold(
                 topBar = {
                     TopAppBar(
-                        { Text(stringResource(Res.string.app_name)) },
+                        {
+                            Row(
+                                Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ){
+                                Text(stringResource(Res.string.app_name))
+
+                                TextField(
+                                    modifier = Modifier.fillMaxWidth().padding(4.dp),
+                                    value = state.query,
+                                    onValueChange = {viewModel.onQueryChange(it)}
+                                )
+                            }
+                        },
                         scrollBehavior = scrollBehavior
                     )
                 },
                 modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
             ) { padding ->
-                val state = viewModel.state
-
                 LoadingIndicator(state.isLoading)
-
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(120.dp),
                     contentPadding = PaddingValues(4.dp),
@@ -67,7 +81,7 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     modifier = Modifier.padding(padding)
                 ) {
-                    items(state.movies, key = { it.id }) { movie ->
+                    items(state.filteredMovies, key = { it.id }) { movie ->
                         MovieItem(movie) { onMovieClick(movie) }
                     }
                 }

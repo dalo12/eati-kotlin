@@ -31,8 +31,20 @@ class HomeViewModel(
         }
     }
 
+    fun onQueryChange(query: String){
+        state = state.copy(query = query)
+    }
+
     data class UiState(
         val isLoading: Boolean = false,
         val movies: List<Movie> = emptyList(),
-    )
+        val query: String = "",
+    ){
+        val filteredMovies: List<Movie>
+            get() = if (query.isBlank()){
+                movies
+            }else{
+                movies.filter{it.title.contains(query, ignoreCase = true)}
+            }
+    }
 }
