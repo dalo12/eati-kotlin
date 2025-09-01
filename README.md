@@ -6,10 +6,10 @@ The project itself is a movie catalog with a filtering. It runs in desktop and A
 
 ## Screenshots
 ### Desktop
-![desktop screenshot] ("/screenshots/desktop.png")
+![desktop screenshot](/screenshots/desktop.png)
 
 ### Adroid
-![android screenshot] ("/screenshots/android.png")
+![android screenshot](/screenshots/android.png)
 
 # Documentation
 This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
