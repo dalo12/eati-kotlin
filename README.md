@@ -5,7 +5,10 @@ This project is a result of the course _Kotlin Multiplatform_ offered by the _Es
 The project itself is a movie catalog with a filtering. It runs in desktop and Android devices.
 
 ## Screenshots
+### Desktop
 ![desktop screenshot] ("/screenshots/desktop.png")
+
+### Adroid
 ![android screenshot] ("/screenshots/android.png")
 
 # Documentation
